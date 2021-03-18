@@ -60,6 +60,15 @@ var RootCmd = &cobra.Command{
 			"started",
 			"done",
 			"break",
+			"there",
+			"say",
+			"yell",
+			"shout",
+			"yourself",
+			"me",
+			"minute",
+			"scene",
+			"begin",
 		}
 
 		allowedWords := append(argumentWords, commandWords...)
@@ -84,13 +93,61 @@ var RootCmd = &cobra.Command{
 
 			// commit
 			When(map[string]interface{}{
-				"into": true,
-			}, "checkout").
+				"say": true,
+			}, "commit").
+			When(map[string]interface{}{
+				"shout": true,
+			}, "commit").
+			When(map[string]interface{}{
+				"yell": true,
+			}, "commit").
+
+			// blame
+			When(map[string]interface{}{
+				"yourself": true,
+			}, "blame").
+			When(map[string]interface{}{
+				"me": true,
+			}, "blame").
+
+			// stash
+			When(map[string]interface{}{
+				"minute": true,
+			}, "stash").
+			When(map[string]interface{}{
+				"scene": true,
+			}, "stash").
+
+			// init
+			When(map[string]interface{}{
+				"started": true,
+			}, "init").
+			When(map[string]interface{}{
+				"begin": true,
+			}, "init").
+
+			// remote
+			When(map[string]interface{}{
+				"there": true,
+			}, "remote").
 
 			// checkout
 			When(map[string]interface{}{
 				"into": true,
 			}, "checkout").
+
+			// rm
+			When(map[string]interface{}{
+				"out": true,
+			}, "rm").
+			When(map[string]interface{}{
+				"lost": true,
+			}, "rm").
+
+			// merge
+			When(map[string]interface{}{
+				"together": true,
+			}, "merge").
 
 			// status
 			When(map[string]interface{}{

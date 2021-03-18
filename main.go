@@ -1,6 +1,7 @@
 package main
 
 import "gitm/cmd"
+
 func main() {
-   cmd.Execute()
+	cmd.Execute()
 }
