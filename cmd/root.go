@@ -43,32 +43,33 @@ var RootCmd = &cobra.Command{
 		}
 
 		commandWords := []string{
+			"begin",
+			"break",
+			"done",
 			"down",
-			"up",
-			"it up",
-			"into",
-			"together",
-			"the",
 			"feel",
 			"feels",
 			"good",
+			"into",
+			"it up",
+			"it",
+			"me",
+			"mess",
+			"minute",
+			"out",
+			"say",
+			"scene",
+			"shout",
+			"started",
+			"stuff",
+			"the",
+			"there",
+			"together",
+			"up",
 			"woo",
 			"yeah",
-			"mess",
-			"stuff",
-			"out",
-			"started",
-			"done",
-			"break",
-			"there",
-			"say",
 			"yell",
-			"shout",
 			"yourself",
-			"me",
-			"minute",
-			"scene",
-			"begin",
 		}
 
 		allowedWords := append(argumentWords, commandWords...)
@@ -90,6 +91,15 @@ var RootCmd = &cobra.Command{
 		extraArgs := args[lastIndex+1:]
 
 		_, command := Match(keywords).
+
+			// checkout
+			When(map[string]interface{}{
+				"into": true,
+				"it":   true,
+			}, "checkout").
+			When(map[string]interface{}{
+				"into": true,
+			}, "checkout").
 
 			// commit
 			When(map[string]interface{}{
@@ -130,11 +140,6 @@ var RootCmd = &cobra.Command{
 			When(map[string]interface{}{
 				"there": true,
 			}, "remote").
-
-			// checkout
-			When(map[string]interface{}{
-				"into": true,
-			}, "checkout").
 
 			// rm
 			When(map[string]interface{}{
