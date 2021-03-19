@@ -6,7 +6,6 @@ import (
 	"log"
 	"os"
 	"os/exec"
-	"strings"
 	"syscall"
 
 	. "github.com/alexpantyukhin/go-pattern-match"
@@ -25,9 +24,10 @@ var cfgFile string
 
 // RootCmd represents the base command when called without any subcommands
 var RootCmd = &cobra.Command{
-	Use:   "gitm",
-	Short: "Stay on the scene like a git machine. ",
-	Long:  `Git on down or up in style with the smoothest git aliases and the funkiest git flow.`,
+	DisableFlagParsing: true,
+	Use:                "gitm",
+	Short:              "Stay on the scene like a git machine. ",
+	Long:               `Git on down or up in style with the smoothest git aliases and the funkiest git flow.`,
 	Run: func(cmd *cobra.Command, args []string) {
 
 		firstArg := args[0]
@@ -43,6 +43,7 @@ var RootCmd = &cobra.Command{
 		}
 
 		commandWords := []string{
+			"about",
 			"begin",
 			"break",
 			"done",
@@ -91,6 +92,9 @@ var RootCmd = &cobra.Command{
 		extraArgs := args[lastIndex+1:]
 
 		_, command := Match(keywords).
+			When(map[string]interface{}{
+				"about": true,
+			}, "branch").
 
 			// checkout
 			When(map[string]interface{}{
@@ -195,23 +199,16 @@ var RootCmd = &cobra.Command{
 			}, "add").
 			Result()
 
-		extras := ""
+		commandString := fmt.Sprintf("%v", command)
 
-		if len(extraArgs) > 0 {
-			extras = fmt.Sprintf(" %v", strings.Join(extraArgs, " "))
-		}
-
-		specifics := fmt.Sprintf("git %v%v", command, extras)
-
-		fmt.Println("EXECUTING:")
-		fmt.Println(specifics)
+		execArgs := append([]string{"git", commandString}, extraArgs...)
 
 		binary, lookErr := exec.LookPath("git")
 		if lookErr != nil {
 			panic(lookErr)
 		}
 
-		execError := syscall.Exec(binary, strings.Split(specifics, " "), os.Environ())
+		execError := syscall.Exec(binary, execArgs, os.Environ())
 		if execError != nil {
 			panic(execError)
 		}
@@ -223,7 +220,6 @@ func configCommand(cmd *cobra.Command, args []string) {
 	configCommand := args[1]
 
 	if configCommand == COMMANDS_CONFIG_INIT {
-		fmt.Println("Saving file")
 		viper.SafeWriteConfig()
 	}
 
@@ -233,8 +229,6 @@ func configCommand(cmd *cobra.Command, args []string) {
 		aliasCommand := args[2]
 
 		if aliasCommand == COMMANDS_CONFIG_ALIASES_ADD {
-			fmt.Println("Adding aliased gitm commands")
-
 			aliasFolderPath := viper.GetString("AliasFolderPath")
 
 			// does alias folder exist
@@ -255,7 +249,6 @@ func configCommand(cmd *cobra.Command, args []string) {
 
 			for _, symlink := range symlinks {
 				os.Symlink(gitmPath, fmt.Sprintf("%v/%v", aliasFolderPath, symlink))
-				fmt.Println(gitmPath)
 				_, symlinkError := exec.LookPath(symlink)
 				if symlinkError != nil {
 					log.Fatal("alias not found on PATH. Make sure you have configured the correct folder.")
@@ -267,8 +260,6 @@ func configCommand(cmd *cobra.Command, args []string) {
 
 		// remove aliases
 		if aliasCommand == COMMANDS_CONFIG_ALIASES_REMOVE {
-			fmt.Println("Removing aliased gitm commands")
-
 			aliasFolderPath := viper.GetString("AliasFolderPath")
 
 			// does alias folder exist
