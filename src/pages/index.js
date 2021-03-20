@@ -181,7 +181,7 @@ const IndexPage = () => {
         </p>
         <p>
           Enable other aliases by using `gitm config aliases add`. This will use
-          your config at `~/.git-machine/config` OR it will use the default
+          your config at `~/.git-machine/config` or it will use the default
           values of `just lets want need`.
         </p>
         <p>eg: "just get on down" instead of gitm on down</p>

@@ -1,4 +1,5 @@
 module.exports = {
+  pathPrefix: "/git-machine",
   siteMetadata: {
     title: "git-machine",
   },
