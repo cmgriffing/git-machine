@@ -319,7 +319,7 @@ func init() {
 	// Here you will define your flags and configuration settings.
 	// Cobra supports persistent flags, which, if defined here,
 	// will be global for your application.
-	RootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.git-machine)")
+	RootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.git-machine/config)")
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
@@ -340,10 +340,10 @@ func initConfig() {
 			os.Exit(1)
 		}
 
-		viper.SetDefault("AliasFolderPath", fmt.Sprintf("%v/gitm-aliases", home))
+		viper.SetDefault("AliasFolderPath", fmt.Sprintf("%v/.git-machine/git-machine/aliases", home))
 
-		viper.AddConfigPath(home)
-		viper.SetConfigName(".git-machine")
+		viper.AddConfigPath(fmt.Sprintf("%v/.git-machine", home))
+		viper.SetConfigName("config")
 	}
 
 	viper.AutomaticEnv() // read in environment variables that match
