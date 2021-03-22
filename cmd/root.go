@@ -66,6 +66,7 @@ var RootCmd = &cobra.Command{
 			"the",
 			"there",
 			"together",
+			"try",
 			"up",
 			"woo",
 			"yeah",
@@ -90,6 +91,10 @@ var RootCmd = &cobra.Command{
 		}
 
 		extraArgs := args[lastIndex+1:]
+
+		_, shouldTry := Match(keywords).When(map[string]interface{}{
+			"try": true,
+		}, true).Result()
 
 		_, command := Match(keywords).
 			When(map[string]interface{}{
@@ -208,9 +213,15 @@ var RootCmd = &cobra.Command{
 			panic(lookErr)
 		}
 
-		execError := syscall.Exec(binary, execArgs, os.Environ())
-		if execError != nil {
-			panic(execError)
+		if shouldTry == true {
+			fmt.Println("---git-machine sandbox mode---")
+			fmt.Println("Would have executed: ")
+			fmt.Println(execArgs)
+		} else {
+			execError := syscall.Exec(binary, execArgs, os.Environ())
+			if execError != nil {
+				panic(execError)
+			}
 		}
 	},
 }
