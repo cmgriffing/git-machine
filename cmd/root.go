@@ -80,6 +80,10 @@ var RootCmd = &cobra.Command{
 
 		lastIndex := 0
 
+		if len(args) == 0 {
+			// Bailout
+		}
+
 		for index, arg := range args {
 			for _, allowedWord := range allowedWords {
 				if arg == allowedWord {
