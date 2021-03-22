@@ -1,4 +1,4 @@
-#!/usr/bin/env bash}
+#!/usr/bin/env bash
 
 # shellcheck source=PLATFORMS.sh
 source PLATFORMS.sh

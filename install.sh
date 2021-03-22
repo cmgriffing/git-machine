@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 echo "Installing git-machine"
 
@@ -6,8 +6,6 @@ echo "SOME ASCII JAMES BROWN"
 
 # shellcheck source=PLATFORMS.sh
 source PLATFORMS.sh
-
-echo "${platform}/${architecture}"
 
 # check if platform supported
 if [[ ! "${SUPPORTED_PLATFORMS[@]}" =~ "${platform}/${architecture}" ]]; then
@@ -18,7 +16,7 @@ fi
 filename="gitm-${platform}-${architecture}"
 
 # download executable for platform
-curl "https://github.com/cmgriffing/git-machine/release/${filename}"
+curl -o- "https://raw.githubusercontent.com/cmgriffing/git-machine/main/release/${filename}"
 
 if [ ! -f filename ]; then
   printf "\\nExecutable %s not downloaded properly." filename
