@@ -340,7 +340,7 @@ func initConfig() {
 			os.Exit(1)
 		}
 
-		viper.SetDefault("AliasFolderPath", fmt.Sprintf("%v/.git-machine/git-machine/aliases", home))
+		viper.SetDefault("AliasFolderPath", fmt.Sprintf("%v/.git-machine/aliases", home))
 
 		viper.AddConfigPath(fmt.Sprintf("%v/.git-machine", home))
 		viper.SetConfigName("config")
