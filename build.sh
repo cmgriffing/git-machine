@@ -16,7 +16,7 @@ do
         output_name+='.exe'
     fi
 
-    env GOOS="$GOOS" GOARCH="$GOARCH" go build -o "release/$output_name" "gitm"
+    env GOOS="$GOOS" GOARCH="$GOARCH" go build -ldflags "-s -w" -o "release/$output_name" "gitm"
     if [ $? -ne 0 ]; then
         echo 'An error has occurred! Aborting the script execution...'
         exit 1
