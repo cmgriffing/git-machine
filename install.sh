@@ -18,7 +18,7 @@ filename="gitm-${platform}-${architecture}"
 # download executable for platform
 curl -o "$filename" -s "https://raw.githubusercontent.com/cmgriffing/git-machine/main/release/${filename}"
 
-if [ ! -f filename ]; then
+if [ ! -f "$filename" ]; then
   printf "\\nExecutable %s not downloaded properly." "$filename"
   exit 1
 fi
@@ -41,6 +41,7 @@ fi
 bin_dir="$prefix_dir/bin"
 
 install -m755 "$filename" "$bin_dir/gitm"
+rm "$filename"
 
 # scaffold $HOME/.git-machine
 mkdir -p ~/.git-machine
