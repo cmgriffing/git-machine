@@ -1,6 +1,6 @@
 const data = {
   instructions: `
-curl https://github.com/cmgriffing/git-machine/install.sh | sh
+curl -o- -s https://raw.githubusercontent.com/cmgriffing/git-machine/main/install.sh | bash
   `,
 };
 
