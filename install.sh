@@ -16,7 +16,7 @@ fi
 filename="gitm-${platform}-${architecture}"
 
 # download executable for platform
-curl -s "https://raw.githubusercontent.com/cmgriffing/git-machine/main/release/${filename}"
+curl -o "$filename" -s "https://raw.githubusercontent.com/cmgriffing/git-machine/main/release/${filename}"
 
 if [ ! -f filename ]; then
   printf "\\nExecutable %s not downloaded properly." filename
