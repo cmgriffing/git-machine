@@ -25,7 +25,7 @@ var cfgFile string
 // RootCmd represents the base command when called without any subcommands
 var RootCmd = &cobra.Command{
 	DisableFlagParsing: true,
-	Use:                "gitm",
+	Use:                "git-machine",
 	Short:              "Stay on the scene like a git machine. ",
 	Long:               `Git on down or up in style with the smoothest git aliases and the funkiest git flow.`,
 	Run: func(cmd *cobra.Command, args []string) {
@@ -252,10 +252,10 @@ func configCommand(cmd *cobra.Command, args []string) {
 				os.Mkdir(aliasFolderPath, 0770)
 			}
 
-			// get gitm path
-			gitmPath, err := exec.LookPath("gitm")
+			// get git-machine path
+			gitmPath, err := exec.LookPath("git-machine")
 			if err != nil {
-				log.Fatal("gitm not found on PATH.")
+				log.Fatal("git-machine not found on PATH.")
 				os.Exit(1)
 			}
 
@@ -285,9 +285,9 @@ func configCommand(cmd *cobra.Command, args []string) {
 			}
 
 			// get gitm path
-			gitmPath, err := exec.LookPath("gitm")
+			gitmPath, err := exec.LookPath("git-machine")
 			if err != nil {
-				log.Fatal("gitm not found on PATH.")
+				log.Fatal("git-machine not found on PATH.")
 				os.Exit(1)
 			}
 
