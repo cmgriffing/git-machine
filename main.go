@@ -1,6 +1,6 @@
 package main
 
-import "gitm/cmd"
+import "git-machine/cmd"
 
 func main() {
 	cmd.Execute()

@@ -1,4 +1,4 @@
-module gitm
+module git-machine
 
 go 1.15
 

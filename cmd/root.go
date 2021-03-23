@@ -249,7 +249,11 @@ func configCommand(cmd *cobra.Command, args []string) {
 			// does alias folder exist
 			_, err := ioutil.ReadDir(aliasFolderPath)
 			if err != nil {
-				os.Mkdir(aliasFolderPath, 0770)
+				err = os.MkdirAll(aliasFolderPath, 0770)
+			}
+			if err != nil {
+				fmt.Println("Couldn't make directory")
+				fmt.Println(aliasFolderPath)
 			}
 
 			// get git-machine path
