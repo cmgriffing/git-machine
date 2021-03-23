@@ -52,6 +52,10 @@ const InstallationTitle = styled.h2`
   ${tw`text-white`}
 `;
 
+const InstructionText = styled.p`
+  ${tw`text-white`}
+`;
+
 const ExampleSection = styled(Section)`
   ${tw`flex flex-col items-center justify-center`}
 
@@ -70,6 +74,8 @@ const ExampleUsage = styled.iframe`
 const Preformatted = styled.pre`
   ${tw`text-white px-4`}
 
+  max-width: 600px;
+  overflow-x: auto;
   background: ${colors.orange};
   ${boxShadowSmall};
   ${textShadow};
@@ -167,9 +173,21 @@ const IndexPage = () => {
       <Features />
       <InstallationInstructions>
         <InstallationTitle>Installation Instructions</InstallationTitle>
+        <InstructionText>
+          This will create a .bin folder where the script was run. You will need
+          to add that to your PATH.
+        </InstructionText>
         <div>
           <Preformatted>
             <code>{installData.instructions}</code>
+          </Preformatted>
+        </div>
+        <InstructionText>
+          You can also pass in a directory already on your PATH.
+        </InstructionText>
+        <div>
+          <Preformatted>
+            <code>{installData.instructionsVerbose}</code>
           </Preformatted>
         </div>
       </InstallationInstructions>
