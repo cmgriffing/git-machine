@@ -1,0 +1,7 @@
+414cadf0a1e8a5800918386eb9121a3c3a9af4721cc217a3c68028992d0438ff  git-machine_v0.0.0-next_Linux_i386.tar.gz
+5619978b6c4f00d4ee68a9ff591aacf656bbd32a66f0c1f2851ba01de423766b  git-machine_v0.0.0-next_Windows_i386.tar.gz
+6bbc00d99ebacf75c09b9abd21768e704c84a4aa657dd427939721b5bd9b1cb8  git-machine_v0.0.0-next_Linux_arm64.tar.gz
+741d03946ba681b4e5523acc2c24a0f3b48c02585fc192762497466379a56ded  git-machine_v0.0.0-next_Darwin_x86_64.tar.gz
+7bdcbc703fa1f57836e77ab00ab4a943129f32c652dd867f9a83bf6d3e96682e  git-machine_v0.0.0-next_Linux_x86_64.tar.gz
+81f396996c4ba1175d24bf5b44b75204f9a44ba46f5ca5781e04bac2239c1a99  git-machine_v0.0.0-next_Windows_x86_64.tar.gz
+859ade8b5c00ccc4d2a1e98ceae8528e54e081b8d687a5e16b6507c49f9b3f73  git-machine_v0.0.0-next_Darwin_arm64.tar.gz

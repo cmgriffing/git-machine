@@ -3,6 +3,7 @@ import tw from "twin.macro";
 import styled from "styled-components";
 import heroBackground from "../images/james-brown-ascii-1.png";
 import Features from "../components/features";
+import { Helmet } from "react-helmet";
 
 import installData from "../utils/data/install";
 import usageData from "../utils/data/usage";
@@ -160,87 +161,92 @@ const UsageCommandExamples = styled.div`
 // markup
 const IndexPage = () => {
   return (
-    <main>
-      <title>git-machine | I feel good</title>
-      <HeroSection>
-        <HeroTitle>git-machine</HeroTitle>
-        <HeroBlurb>`just git on down` with the hippest flow around</HeroBlurb>
-      </HeroSection>
-      <ExampleSection>
-        <SectionTitle>Example</SectionTitle>
-        <ExampleUsage src="https://asciinema.org/a/400666/embed?size=small&speed=2" />
-      </ExampleSection>
-      <Features />
-      <InstallationInstructions>
-        <InstallationTitle>Installation Instructions</InstallationTitle>
-        <InstructionText>
-          This will create a .bin folder where the script was run. You will need
-          to add that to your PATH.
-        </InstructionText>
-        <div>
-          <Preformatted>
-            <code>{installData.instructions}</code>
-          </Preformatted>
-        </div>
-        <InstructionText>
-          You can also pass in a directory already on your PATH.
-        </InstructionText>
-        <div>
-          <Preformatted>
-            <code>{installData.instructionsVerbose}</code>
-          </Preformatted>
-        </div>
-      </InstallationInstructions>
-      <UsageSection>
-        <SectionTitle>Usage</SectionTitle>
-        <p>
-          The root executable is gitm. That is the only root command/alias
-          enabled by default.
-        </p>
-        <p>
-          Enable other aliases by using `gitm config aliases add`. This will use
-          your config at `~/.git-machine/config` or it will use the default
-          values of `just lets want need`.
-        </p>
-        <p>eg: "just get on down" instead of gitm on down</p>
-        <BlockTitle>Command Recognition</BlockTitle>
-        <p>
-          git-machine uses pattern matching to determine the git command. If it
-          recognizes a keyword, it drops insignificant text before it and
-          proxies the rest of the arguments to git with the determined command.
-        </p>
-        <p>
-          As an example `lets get on up` will recognize "up" and ignore "get"
-          and "on".
-        </p>
-        <BlockTitle>Commands List</BlockTitle>
+    <>
+      <Helmet>
+        <title>git-machine | I feel good</title>
+      </Helmet>
+      <main>
+        <HeroSection>
+          <HeroTitle>git-machine</HeroTitle>
+          <HeroBlurb>`just git on down` with the hippest flow around</HeroBlurb>
+        </HeroSection>
+        <ExampleSection>
+          <SectionTitle>Example</SectionTitle>
+          <ExampleUsage src="https://asciinema.org/a/400666/embed?size=small&speed=2" />
+        </ExampleSection>
+        <Features />
+        <InstallationInstructions>
+          <InstallationTitle>Installation Instructions</InstallationTitle>
+          <InstructionText>
+            This will create a .bin folder where the script was run. You will
+            need to add that to your PATH.
+          </InstructionText>
+          <div>
+            <Preformatted>
+              <code>{installData.instructions}</code>
+            </Preformatted>
+          </div>
+          <InstructionText>
+            You can also pass in a directory already on your PATH.
+          </InstructionText>
+          <div>
+            <Preformatted>
+              <code>{installData.instructionsVerbose}</code>
+            </Preformatted>
+          </div>
+        </InstallationInstructions>
+        <UsageSection>
+          <SectionTitle>Usage</SectionTitle>
+          <p>
+            The root executable is gitm. That is the only root command/alias
+            enabled by default.
+          </p>
+          <p>
+            Enable other aliases by using `gitm config aliases add`. This will
+            use your config at `~/.git-machine/config` or it will use the
+            default values of `just lets want need`.
+          </p>
+          <p>eg: "just get on down" instead of gitm on down</p>
+          <BlockTitle>Command Recognition</BlockTitle>
+          <p>
+            git-machine uses pattern matching to determine the git command. If
+            it recognizes a keyword, it drops insignificant text before it and
+            proxies the rest of the arguments to git with the determined
+            command.
+          </p>
+          <p>
+            As an example `lets get on up` will recognize "up" and ignore "get"
+            and "on".
+          </p>
+          <BlockTitle>Commands List</BlockTitle>
 
-        <UsageCommandsList>
-          <UsageCommand className="heading">
-            <UsageCommandDetails>
-              <UsageCommandDetail>gitm keyword</UsageCommandDetail>
-              <UsageCommandDetail>git command</UsageCommandDetail>
-            </UsageCommandDetails>
-          </UsageCommand>
-          {usageData.commands.map((command) => (
-            <UsageCommand>
+          <UsageCommandsList>
+            <UsageCommand className="heading">
               <UsageCommandDetails>
-                <UsageCommandDetail>
-                  {command.keywords.join(" | ")}
-                </UsageCommandDetail>
-                <UsageCommandDetail>{command.gitCommand}</UsageCommandDetail>
+                <UsageCommandDetail>gitm keyword</UsageCommandDetail>
+                <UsageCommandDetail>git command</UsageCommandDetail>
               </UsageCommandDetails>
-              <UsageCommandExamples>
-                <div>
-                  <b>example:</b>
-                </div>{" "}
-                {command.examples.join(" | ")}
-              </UsageCommandExamples>
             </UsageCommand>
-          ))}
-        </UsageCommandsList>
-      </UsageSection>
-    </main>
+            {usageData.commands.map((command) => (
+              <UsageCommand>
+                <UsageCommandDetails>
+                  <UsageCommandDetail>
+                    {command.keywords.join(" | ")}
+                  </UsageCommandDetail>
+                  <UsageCommandDetail>{command.gitCommand}</UsageCommandDetail>
+                </UsageCommandDetails>
+                <UsageCommandExamples>
+                  <div>
+                    <b>example:</b>
+                  </div>{" "}
+                  {command.examples.join(" | ")}
+                </UsageCommandExamples>
+              </UsageCommand>
+            ))}
+          </UsageCommandsList>
+        </UsageSection>
+      </main>
+    </>
   );
 };
 
